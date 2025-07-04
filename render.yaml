@@ -1,0 +1,13 @@
+# render.yaml
+services:
+  - type: web
+    name: turk-yemek-api-v2 # Render'daki servis adınız
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.13
+    healthCheck:
+      path: /
+      initialDelaySeconds: 300 # İşte aradığımız ayar! 5 dakika bekle.
